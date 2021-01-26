@@ -57,3 +57,5 @@ C:\Users\Tommy\source\repos\SampleCRUD\bin\Microsoft.CodeDom.Providers.DotNetCom
 C:\Users\Tommy\source\repos\SampleCRUD\obj\Debug\SampleCRUD.csproj.CopyComplete
 C:\Users\Tommy\source\repos\SampleCRUD\obj\Debug\SampleCRUD.dll
 C:\Users\Tommy\source\repos\SampleCRUD\obj\Debug\SampleCRUD.pdb
+C:\Users\Tommy\source\repos\SampleCRUD\bin\Newtonsoft.Json.dll
+C:\Users\Tommy\source\repos\SampleCRUD\bin\Newtonsoft.Json.xml
