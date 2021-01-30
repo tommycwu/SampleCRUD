@@ -120,7 +120,6 @@
                                     <asp:TextBox ID="TextBox16" runat="server">Username</asp:TextBox>
                                     </td>
                     <td class="auto-style3">
-                        <br />
                                     <asp:TextBox ID="TextBox15" runat="server" Width="400px">/api/v1/users/{userId}/credentials/forgot_password</asp:TextBox>
                                 </td>
                     <td>
@@ -200,11 +199,38 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style2">&nbsp;</td>
-                    <td class="auto-style3">&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style2">
+                                    <asp:TextBox ID="TextBox34" runat="server" Width="205px">FName, LName, Email</asp:TextBox>
+                                    </td>
+                    <td class="auto-style3">
+                                    <asp:TextBox ID="TextBox35" runat="server" Width="400px">/api/v1/users?q=</asp:TextBox>
+                                </td>
+                    <td>
+                        <asp:Button ID="Button7" runat="server" OnClick="Button7_Click" Text="Forgot Username" />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox36" runat="server" Width="300px" Height="200px" TextMode="MultiLine"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label13" runat="server" Text="https://developer.okta.com/docs/reference/api/users/#find-users"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style2">
+                                    <asp:TextBox ID="TextBox38" runat="server" Width="205px">Phone</asp:TextBox>
+                                    </td>
+                    <td class="auto-style3">
+                                    <asp:TextBox ID="TextBox39" runat="server" Width="400px">/api/v1/users?search=profile.mobilePhone+eq+\&quot;555-555-5555\&quot;</asp:TextBox>
+                                </td>
+                    <td>
+                        <asp:Button ID="Button8" runat="server" OnClick="Button8_Click" Text="Forgot Username" />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="TextBox37" runat="server" Width="300px" Height="200px" TextMode="MultiLine"></asp:TextBox>
+                    </td>
+                    <td>
+                        <asp:Label ID="Label14" runat="server" Text="https://developer.okta.com/docs/reference/api/users/#list-users-with-search"></asp:Label>
+                    </td>
                 </tr>
             </table>
         </div>

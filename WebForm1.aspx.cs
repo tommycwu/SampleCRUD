@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace SampleCRUD
 {
@@ -105,6 +106,78 @@ namespace SampleCRUD
                 return ex.Message;
             }
         }
+        private List<string> GetUserQuery(string baseUrl, string apiKey, string searchStr)
+        {
+            var fullUrl = baseUrl + "/api/v1/users?q=" + searchStr;
+            try
+            {
+                var returnList = new List<string>();
+                var endpoint = new Uri(fullUrl);
+                var webRequest = WebRequest.Create(endpoint) as HttpWebRequest;
+                if (webRequest != null)
+                {
+                    webRequest.Method = "GET";
+                    webRequest.Headers.Add("Authorization", "SSWS " + apiKey);
+                    webRequest.Accept = "application/json";
+                    webRequest.ContentType = "application/json";
+                    var response = webRequest.GetResponse();
+                    using (var reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        string jsonString = reader.ReadToEnd();
+                        dynamic jsonObject = JsonConvert.DeserializeObject(jsonString, typeof(object));
+                        for (int i = 0; i <= jsonObject.Count - 1; i++)
+                        {
+                            var loginFound = jsonObject[i].profile.login;
+                            returnList.Add(loginFound.Value);
+                        }
+                        return returnList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                List<string> errMsg = new List<string>();
+                errMsg.Add(ex.Message);
+                return errMsg;
+            }
+            return null;
+        }
+        private List<string> GetUserByPhone(string baseUrl, string apiKey, string searchStr)
+        {
+            var fullUrl = baseUrl + "/api/v1/users?search=profile.mobilePhone+sw+\"" + searchStr + "\"";
+            try
+            {
+                var returnList = new List<string>();
+                var endpoint = new Uri(fullUrl);
+                var webRequest = WebRequest.Create(endpoint) as HttpWebRequest;
+                if (webRequest != null)
+                {
+                    webRequest.Method = "GET";
+                    webRequest.Headers.Add("Authorization", "SSWS " + apiKey);
+                    webRequest.Accept = "application/json";
+                    webRequest.ContentType = "application/json";
+                    var response = webRequest.GetResponse();
+                    using (var reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        string jsonString = reader.ReadToEnd();
+                        dynamic jsonObject = JsonConvert.DeserializeObject(jsonString, typeof(object));
+                        for (int i = 0; i <= jsonObject.Count - 1; i++)
+                        {
+                            var loginFound = jsonObject[i].profile.login;
+                            returnList.Add(loginFound.Value);
+                        }
+                        return returnList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                List<string> errMsg = new List<string>();
+                errMsg.Add(ex.Message);
+                return errMsg;
+            }
+            return null;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -165,6 +238,24 @@ namespace SampleCRUD
             string userId = GetUserId(TextBox6.Text, TextBox7.Text, TextBox31.Text);
             string fullUrl = TextBox6.Text + $"/api/v1/users/{userId}?sendEmail=true";
             TextBox33.Text = DeleteUser(fullUrl, TextBox7.Text);
+        }
+
+        protected void Button7_Click(object sender, EventArgs e)
+        {
+            List<string> resultList = GetUserQuery(TextBox6.Text, TextBox7.Text, TextBox34.Text);
+            foreach (string resultItem in resultList)
+            {
+                TextBox36.Text += resultItem + "\r\n";
+            }
+        }
+
+        protected void Button8_Click(object sender, EventArgs e)
+        {
+            List<string> resultList = GetUserByPhone(TextBox6.Text, TextBox7.Text, TextBox38.Text);
+            foreach (string resultItem in resultList)
+            {
+                TextBox37.Text += resultItem + "\r\n";
+            }
         }
     }
 }
